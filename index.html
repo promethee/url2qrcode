@@ -101,10 +101,9 @@
               }
             };
             getUrlFromLocation();
-            
-            document.getElementById('qr-input').addEventListener('change', onNewQrCode);
-            document.getElementById('qr-input').addEventListener('blur', onNewQrCode);
-            document.getElementById('qr-input').addEventListener('keyup', onNewQrCode);
+            ['change', 'blur', 'focus', 'keyup'].map(function (event) {
+              document.getElementById('qr-input').addEventListener(event, onNewQrCode);  
+            });
         </script>
   </body>
 </html>
