@@ -89,7 +89,6 @@
             var getUrlFromLocation = function getUrlFromLocation() {
               var v = window.location;
               var s = window.location.search;
-              console.log('window.location.search', window.location.search);
               if (window.location.search) {
                 var url = window.location.search.split('?')[1].split('=')[1];
                 if (url) {
@@ -97,6 +96,8 @@
                 } else {
                   mkQr('');
                 }
+              }  else {
+                mkQr('');
               }
             };
             getUrlFromLocation();
