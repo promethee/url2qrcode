@@ -94,6 +94,8 @@
                 var url = window.location.search.split('?')[1].split('=')[1];
                 if (url) {
                   mkQr(url)
+                } else {
+                  mkQr('');
                 }
               }
             };
