@@ -56,6 +56,13 @@
 <h3>
 <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
 
+<p>
+  <h3>Put any url in the field below</h3>
+  <input type="url" id="qr-input" placeholder="http://whatever.com"/>
+</p>
+<p id="qr-result">
+</p>
+
 <p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
       </section>
       <footer>
@@ -64,9 +71,36 @@
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    <script>
-      var url = window.location;
-      console.log('url', url);
-    </script>
+        <script>
+            var mkQr = function mkQr(url) {
+                if (!document.getElementById(id)) {
+                    var qrDiv = document.createElement('div');
+                    qrDiv.id = 'qrcode';
+                    document.getElementById('qr-result').appendChild(qrDiv);
+                }
+                $('#qrcode').html('').qrcode(url);
+            };
+            
+            var onNewQrCode = function onNewQrCode(url) {
+                url = url && !url.target ? url:document.getElementById('qr-input').value;
+                mkQr(url)
+            };
+            
+            var getUrlFromLocation = function getUrlFromLocation() {
+              var v = window.location;
+              var s = window.location.search;
+              console.log('window.location.search', window.location.search);
+              if (window.location.search) {
+                var url = window.location.search.split('?')[1].split('=')[1];
+                if (url) {
+                  mkQr(url)
+                }
+              }
+            };
+            
+            document.getElementById('qr-input').addEventListener('change', onNewQrCode);
+            document.getElementById('qr-input').addEventListener('blur', onNewQrCode);
+            document.getElementById('qr-input').addEventListener('keydown', onNewQrCode);
+        </script>
   </body>
 </html>
