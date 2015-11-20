@@ -51,6 +51,7 @@
                     qrDiv.id = 'qrcode';
                     document.getElementById('qr-result').appendChild(qrDiv);
                 }
+                document.getElementById('qr-input').value = url;
                 $('#qrcode').html('').qrcode(url);
             };
             
