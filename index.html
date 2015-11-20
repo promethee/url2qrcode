@@ -61,16 +61,17 @@
             
             var getUrlFromLocation = function getUrlFromLocation() {
               var v = window.location;
+              var r = document.referrer;
               var s = window.location.search;
               if (window.location.search) {
                 var url = window.location.search.split('?')[1].split('=')[1];
                 if (url) {
                   mkQr(url)
                 } else {
-                  mkQr('');
+                  mkQr(r);
                 }
               }  else {
-                mkQr('');
+                mkQr(r);
               }
             };
             getUrlFromLocation();
