@@ -53,7 +53,9 @@
             var wantWrapper = function wantWrapper(url) {
               url = url || document.referrer;
               var wantGetPocket = -1 < url.indexOf('type=pocket');
+              console.log('wantGetPocket', wantGetPocket, url.indexOf('type=pocket'));
               if (wantGetPocket) {
+                console.log('externalWrapper.pocket.url+url', externalWrapper.pocket.url+url);
                 return externalWrapper.pocket.url+url;
               } else {
                 return url;
