@@ -82,7 +82,7 @@
                 }
                 document.getElementById('qr-input').value = url;
                 $('#qrcode').html('').qrcode(url);
-                var pocketUrl = wantWrapper(url);
+                var pocketUrl = wantWrapper(window.location.href);
                 if (pocketUrl) {
                   $('#qrcode-pocket').html('').qrcode(pocketUrl);
                 }
