@@ -45,6 +45,18 @@
     </div>
     <script src="javascripts/scale.fix.js"></script>
         <script>
+            var externalWrapper = {
+              'pocket': {
+                url: 'https://getpocket.com/edit?url='
+              }
+            };
+            var wantWrapper = function wantWrapper(url) {
+              url = url || document.referrer;
+              var wantGetPocket = -1 < url.indexOf('type=pocket');
+              if (wantGetPocket) {
+                return externalWrapper.pocket.url+url;
+              }
+            };
             var mkQr = function mkQr(url) {
                 if (!document.getElementById('qrcode')) {
                     var qrDiv = document.createElement('div');
@@ -69,10 +81,10 @@
                 if (url) {
                   mkQr(url)
                 } else {
-                  mkQr(r);
+                  mkQr(wantWrapper(r));
                 }
               }  else {
-                mkQr(r);
+                mkQr(wantWrapper(r));
               }
             };
             getUrlFromLocation();
