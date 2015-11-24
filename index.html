@@ -60,14 +60,13 @@
               }
             };
             var wantWrapper = function wantWrapper(url) {
-              url = url || document.referrer;
               var wantGetPocket = -1 < url.indexOf('type=pocket');
               console.log('wantGetPocket', wantGetPocket, url.indexOf('type=pocket'));
               if (wantGetPocket) {
                 console.log('externalWrapper.pocket.url+url', externalWrapper.pocket.url+url);
                 return externalWrapper.pocket.url+url;
               } else {
-                return url;
+                return false;
               }
             };
             var mkQr = function mkQr(url) {
@@ -76,8 +75,17 @@
                     qrDiv.id = 'qrcode';
                     document.getElementById('qr-result').appendChild(qrDiv);
                 }
+                if (!document.getElementById('qrcode-pocket')) {
+                    var qrDiv2 = document.createElement('div');
+                    qrDiv2.id = 'qrcode-pocket';
+                    document.getElementById('qr-pocket').appendChild(qrDiv2);
+                }
                 document.getElementById('qr-input').value = url;
-                $('#qrcode').html('').qrcode(wantWrapper(url));
+                $('#qrcode').html('').qrcode(url);
+                var pocketUrl = wantWrapper(url);
+                if (pocketUrl) {
+                  $('#qrcode-pocket').html('').qrcode(pocketUrl);
+                }
             };
             
             var onNewQrCode = function onNewQrCode(url) {
