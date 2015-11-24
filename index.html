@@ -55,6 +55,8 @@
               var wantGetPocket = -1 < url.indexOf('type=pocket');
               if (wantGetPocket) {
                 return externalWrapper.pocket.url+url;
+              } else {
+                return url;
               }
             };
             var mkQr = function mkQr(url) {
@@ -64,7 +66,7 @@
                     document.getElementById('qr-result').appendChild(qrDiv);
                 }
                 document.getElementById('qr-input').value = url;
-                $('#qrcode').html('').qrcode(url);
+                $('#qrcode').html('').qrcode(wantWrapper(url));
             };
             
             var onNewQrCode = function onNewQrCode(url) {
@@ -81,10 +83,10 @@
                 if (url) {
                   mkQr(url)
                 } else {
-                  mkQr(wantWrapper(r));
+                  mkQr(r);
                 }
               }  else {
-                mkQr(wantWrapper(r));
+                mkQr(r);
               }
             };
             getUrlFromLocation();
