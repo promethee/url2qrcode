@@ -77,20 +77,24 @@
             var mkQr = function mkQr(url) {
                 document.getElementById('qr-input').value = url;
                 var pocketUrl = wantWrapper(window.location.href);
+                if (!document.getElementById('qrcode')) {
+                    var qrDiv = document.createElement('div');
+                    qrDiv.id = 'qrcode';
+                    document.getElementById('qr-result').appendChild(qrDiv);
+                }
+                if (!document.getElementById('qrcode-pocket')) {
+                    var qrDiv2 = document.createElement('div');
+                    qrDiv2.id = 'qrcode-pocket';
+                    document.getElementById('qr-pocket').appendChild(qrDiv2);
+                }
 
                 if (pocketUrl) {
-                  if (!document.getElementById('qrcode-pocket')) {
-                      var qrDiv2 = document.createElement('div');
-                      qrDiv2.id = 'qrcode-pocket';
-                      document.getElementById('qr-pocket').appendChild(qrDiv2);
-                  }
+                  document.getElementById('qrcode').style.display = 'none';
+                  document.getElementById('qrcode-pocket').style.display = '';
                   $('#qrcode-pocket').html('').qrcode(pocketUrl);
                 } else {
-                  if (!document.getElementById('qrcode')) {
-                      var qrDiv = document.createElement('div');
-                      qrDiv.id = 'qrcode';
-                      document.getElementById('qr-result').appendChild(qrDiv);
-                  }
+                  document.getElementById('qrcode-pocket').style.display = 'none';
+                  document.getElementById('qrcode').style.display = '';
                   $('#qrcode').html('').qrcode(url);
                 }
             };
