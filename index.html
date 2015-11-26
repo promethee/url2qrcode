@@ -75,21 +75,23 @@
               }
             };
             var mkQr = function mkQr(url) {
-                if (!document.getElementById('qrcode')) {
-                    var qrDiv = document.createElement('div');
-                    qrDiv.id = 'qrcode';
-                    document.getElementById('qr-result').appendChild(qrDiv);
-                }
-                if (!document.getElementById('qrcode-pocket')) {
-                    var qrDiv2 = document.createElement('div');
-                    qrDiv2.id = 'qrcode-pocket';
-                    document.getElementById('qr-pocket').appendChild(qrDiv2);
-                }
                 document.getElementById('qr-input').value = url;
-                $('#qrcode').html('').qrcode(url);
                 var pocketUrl = wantWrapper(window.location.href);
+
                 if (pocketUrl) {
+                  if (!document.getElementById('qrcode-pocket')) {
+                      var qrDiv2 = document.createElement('div');
+                      qrDiv2.id = 'qrcode-pocket';
+                      document.getElementById('qr-pocket').appendChild(qrDiv2);
+                  }
                   $('#qrcode-pocket').html('').qrcode(pocketUrl);
+                } else {
+                  if (!document.getElementById('qrcode')) {
+                      var qrDiv = document.createElement('div');
+                      qrDiv.id = 'qrcode';
+                      document.getElementById('qr-result').appendChild(qrDiv);
+                  }
+                  $('#qrcode').html('').qrcode(url);
                 }
             };
             
